@@ -5,6 +5,8 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import { TrendingUp, Users, DollarSign, Package } from 'lucide-react';
 
 const Analytics = () => {
+  console.log('Analytics component rendering');
+  
   const monthlyData = [
     { month: 'Jan', revenue: 120000, expenses: 80000, projects: 8 },
     { month: 'Feb', revenue: 150000, expenses: 90000, projects: 12 },
@@ -101,16 +103,18 @@ const Analytics = () => {
             <CardTitle className="text-lg font-semibold text-gray-900">Revenue vs Expenses</CardTitle>
           </CardHeader>
           <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={monthlyData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="month" />
-                <YAxis />
-                <Tooltip formatter={(value) => `₹${(value as number).toLocaleString()}`} />
-                <Bar dataKey="revenue" fill="#3B82F6" name="Revenue" />
-                <Bar dataKey="expenses" fill="#EF4444" name="Expenses" />
-              </BarChart>
-            </ResponsiveContainer>
+            <div style={{ width: '100%', height: 300 }}>
+              <ResponsiveContainer>
+                <BarChart data={monthlyData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="month" />
+                  <YAxis />
+                  <Tooltip formatter={(value) => `₹${(value as number).toLocaleString()}`} />
+                  <Bar dataKey="revenue" fill="#3B82F6" name="Revenue" />
+                  <Bar dataKey="expenses" fill="#EF4444" name="Expenses" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
           </CardContent>
         </Card>
 
@@ -120,23 +124,25 @@ const Analytics = () => {
             <CardTitle className="text-lg font-semibold text-gray-900">Expense Distribution</CardTitle>
           </CardHeader>
           <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie
-                  data={expenseCategories}
-                  cx="50%"
-                  cy="50%"
-                  outerRadius={80}
-                  dataKey="value"
-                  label={({ name, value }) => `${name}: ${value}%`}
-                >
-                  {expenseCategories.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip />
-              </PieChart>
-            </ResponsiveContainer>
+            <div style={{ width: '100%', height: 300 }}>
+              <ResponsiveContainer>
+                <PieChart>
+                  <Pie
+                    data={expenseCategories}
+                    cx="50%"
+                    cy="50%"
+                    outerRadius={80}
+                    dataKey="value"
+                    label={({ name, value }) => `${name}: ${value}%`}
+                  >
+                    {expenseCategories.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
           </CardContent>
         </Card>
 
@@ -146,15 +152,17 @@ const Analytics = () => {
             <CardTitle className="text-lg font-semibold text-gray-900">Project Growth Trend</CardTitle>
           </CardHeader>
           <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={monthlyData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="month" />
-                <YAxis />
-                <Tooltip />
-                <Line type="monotone" dataKey="projects" stroke="#10B981" strokeWidth={3} />
-              </LineChart>
-            </ResponsiveContainer>
+            <div style={{ width: '100%', height: 300 }}>
+              <ResponsiveContainer>
+                <LineChart data={monthlyData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="month" />
+                  <YAxis />
+                  <Tooltip />
+                  <Line type="monotone" dataKey="projects" stroke="#10B981" strokeWidth={3} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
           </CardContent>
         </Card>
 
@@ -164,16 +172,18 @@ const Analytics = () => {
             <CardTitle className="text-lg font-semibold text-gray-900">Department Task Completion</CardTitle>
           </CardHeader>
           <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={taskProgress} layout="horizontal">
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis type="number" domain={[0, 100]} />
-                <YAxis dataKey="department" type="category" width={80} />
-                <Tooltip formatter={(value) => `${value}%`} />
-                <Bar dataKey="completed" stackId="a" fill="#10B981" name="Completed" />
-                <Bar dataKey="pending" stackId="a" fill="#F59E0B" name="Pending" />
-              </BarChart>
-            </ResponsiveContainer>
+            <div style={{ width: '100%', height: 300 }}>
+              <ResponsiveContainer>
+                <BarChart data={taskProgress} layout="horizontal">
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis type="number" domain={[0, 100]} />
+                  <YAxis dataKey="department" type="category" width={80} />
+                  <Tooltip formatter={(value) => `${value}%`} />
+                  <Bar dataKey="completed" stackId="a" fill="#10B981" name="Completed" />
+                  <Bar dataKey="pending" stackId="a" fill="#F59E0B" name="Pending" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
           </CardContent>
         </Card>
       </div>
